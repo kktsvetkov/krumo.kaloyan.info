@@ -1,0 +1,1675 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<title>Krumo: Version 2.0 of print_r(); and var_dump();</title>
+<meta name="google-site-verification"
+content="bR8BE83B3cvvKjERXLzP4jZOzd5ZHmBD5goPlbX--BU" />
+<meta name="keywords" content="php, php5, debug, print_r, var_dump, dump, report, tool, code, var_export" />
+<meta name="description" content="To put it simply, Krumo is a replacement for print_r(); and var_dump();. By definition Krumo is a debugging tool (initially for PHP4/PHP5, now for PHP5 only), which displays structured information about any PHP variable." />
+<script type="text/javascript" src="./lightbox2.03/js/prototype.js"></script>
+<script type="text/javascript" src="./lightbox2.03/js/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="./lightbox2.03/js/lightbox.js"></script>
+<link rel="stylesheet" href="./lightbox2.03/css/lightbox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./krumo.css" type="text/css" media="screen" />
+</head>
+<body><a name="top"></a>
+
+<div id="outter">
+
+	<!--# HEADER #-->
+	<div id="hdr">
+
+		<h1 id="lgo" title="Krumo: Version 2.0 of print_r(); and var_dump();">
+			<a href="http://github.com/kktsvetkov/krumo/" title="Krumo: Version 2.0 of print_r(); and var_dump();">
+				Krumo: version 2.0 of print_r(); and var_dump();</a>
+		</h1>
+	</div>
+
+	<!--# BODY #-->
+	<div id="cntnt">
+
+		<div id="nav">
+			<div id="mnu">
+				<ul>
+					<li><a id="link-overview" href="#overview">Overview</a></li>
+					<li><a id="link-install" href="#install">Install</a></li>
+					<li><a id="link-example" href="#example">Examples</a></li>
+					<li><a id="link-skins" href="#skins">Skins</a></li>
+					<li><a id="link-docs" href="#docs">Documentation</a></li>
+					<li><a id="link-download" href="#download">Download</a></li>
+					<li><a id="link-tracker" href="#tracker">Bug Tracker</a></li>
+					<li><a id="link-forum" href="#forum">Forums</a></li>
+				</ul>
+			</div>
+
+			<div style="margin: 1em 0;">
+				<a href="http://github.com/kktsvetkov/krumo/"><img
+					src="./images/GitHub.jpg"
+					style="width:180px"
+					alt="Krumo at Github.com" /></a>
+			</div>
+		</div>
+
+		<div id="inner">
+
+			<a name="overview"></a>
+			<h2>Overview</h2>
+			<p>
+			To put it simply, <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			is a replacement for <code>print_r()</code> and <code>var_dump()</code>. By
+			definition <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> is a
+			debugging tool which displays structured information about any <strong>PHP</strong>
+			variable.
+			</p>
+
+			<p>
+			A lot of developers use <code>print_r()</code> and <code>var_dump()</code> in the means of debugging
+			tools. Although they were intended to present human readble information about a
+			variable, we can all agree that in general they are not. <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> is an
+			alternative: it does the same job, but it presents the information beautified
+			using HTML, CSS and JS.
+			</p>
+
+			<p>
+			Except the collapsible tree built around the structure of the dumped <strong>PHP</strong> variable, and the
+			improved by the CSS looks, <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> offers additional useful features.
+			</p>
+
+			<p>
+			For example haven't you been disappointed that you can not see the name of the
+			variable passed for dumping ? Calling it many times, you will not be able to
+			know which dump value was provided by a certain variable at a certain time in a
+			certain place of your code. Well, <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> can not do that either, but it offers a
+			work-around: it prints the code line that the <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> call was placed: in this
+			way you can keep track of the origin of each dump you see on the screen.
+			</p>
+
+			<p>
+			Another nice addition to the set of <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			features is the ability to turn it off. When your code gets swamped with a lot of dumping calls,
+			instead of cleaning them up, you can just turn them off. You go to admit that this beats the
+			alternative of going through your code and removing every dumping route you have ... right ?
+			</p>
+
+			<p>
+			A lot of times you need to dump the contents of the superglobals (<code>$_GET</code>, <code>$_POST</code>, <code>$_SERVER</code>,
+			<code>$_SESSION</code>, etc), or see the list of included files, or the declared classes and interfaces, or the
+			defined constants, etc. <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> offers an easy, fast and
+			graceful way to do this with just one simple call: see the
+			<a href="#example">examples</a> area for demonstration, or just load <a href="./demo/index.php" target="_blank">this page</a> to see the results.
+			</p>
+
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="install"></a>
+			<h2>Install</h2>
+			<p>
+			Two ways to do this:
+			</p>
+			<ul>
+				<li>
+				The old-fashioned way: in order to use <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> you
+				have to put it on your (development) server, and include it in your script. You can put it somewhere in the
+				<code><strong>INCLUDE_PATH</strong></code>, or specify the full path to the <code>class.krumo.php</code> file.
+					<br />
+					<br />
+				</li>
+
+				<li>
+				The modern way: use <a hred="http://getcomposer.org">Composer</a>. You can either install
+				<a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> like this:
+<pre>
+ php composer.phar install kktsvetkov/krumo
+</pre>
+				</li>
+			</ul>
+
+			<p>
+			And that's it - you can use it out of the box. If you want to change the "skin" used to render the resuls,
+			you have to modify the <code>krumo::$skin</code> property.
+			</p>
+
+<pre>
+ krumo::$skin = 'orange';
+</pre>
+
+			<p>
+			The value for this setting has to be the name of one of the sub-folders from the
+			<code>Krumo/skins/</code> folder. If the value provided for the skin results in not finding
+			the skin, the <kbd>default</kbd> skin will be used instead.
+			</p>
+			<p>
+			All the CSS files ("<code>skin.css</code>") from the <code>Krumo/skins</code> sub-folders must have the
+			proper permissions in order to be readable from <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>.
+
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="example"></a>
+			<h2>Examples</h2>
+			<p>
+			Here's a basic <b>PHP</b> example, which will return a report on the array variable passed
+			as argument to it:
+			</p>
+<pre>
+ krumo(array('a1'=> 'A1', 3, 'red'));
+</pre>
+<style type="text/css">
+/**
+* Krumo `Schablon.com` Skin
+* @author Kaloyan K. Tsvetkov <kaloyan@kaloyan.info>
+*/
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+ul.krumo-node {
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+	}
+ul.krumo-node ul {
+	margin-left: 20px;
+	}
+* html ul.krumo-node ul {
+	margin-left: 24px;
+	}
+div.krumo-root {
+	border: solid 1px black;
+	margin: 1em 0em;
+	}
+ul.krumo-first {
+	font: normal 11px tahoma, verdana;
+	border: solid 1px white;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+li.krumo-child {
+	display:block;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	overflow:hidden;
+	}
+div.krumo-element {
+	cursor:default;
+	display:block;
+	clear:both;
+	white-space:nowrap;
+
+	background-color: white;
+	background-image: url(data:image/gif;base64,R0lGODlhCQAJALMAAP////8AAICAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAJAAkAAAQSEAAhq6VWUpx3n+AVVl42ilkEADs=);
+	background-repeat: no-repeat;
+	background-position: 6px 5px;
+	padding: 2px 0px 3px 20px;
+	}
+* html div.krumo-element {
+	padding-bottom: 3px;
+	line-height: 13px;
+	}
+div.krumo-element:hover {
+	background-color: #BFDFFF;
+	}
+div.krumo-expand {
+	background-image: url(data:image/gif;base64,R0lGODlhCQAJALMAAP///wAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAJAAkAAAQTEIAna33USpwt79vncRpZgpcGRAA7);
+	cursor:pointer;
+	}
+div.krumo-opened {
+	background-image: url(data:image/gif;base64,R0lGODlhCQAJALMAAP///wAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAJAAkAAAQQEMhJ63w4Z6C37JUXWmQJRAA7);
+	}
+a.krumo-name {
+	color:navy;
+	font: bold 13px courier new;
+	line-height:12px;
+	}
+a.krumo-name big {
+	font: bold 16pt Console, "Courier New";
+	line-height: 10px;
+	position:relative;
+	top:2px;
+	left:-2px;
+	}
+* html a.krumo-name big {
+	font: bold 15pt Console, "Courier New";
+	float:left;
+	top: -5px;
+	left: 0px;
+	padding: 0px;
+	margin: 0px;
+	}
+em.krumo-type {
+	font-style:normal;
+	margin: 0px 2px;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+div.krumo-preview {
+	font: normal 13px courier new;
+	padding: 5px ;
+	background: lightyellow;
+	border: solid 1px #808000;
+	overflow:auto;
+	margin: 5px 1em 1em 0px;
+	white-space:pre;
+	}
+* html div.krumo-preview {
+	padding-top: 2px;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+li.krumo-footnote {
+	background: white url(data:image/gif;base64,R0lGODlhCgACALMAAP///8DAwP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAKAAIAAAQIEMhJA7D4gggAOw==) repeat-x;
+	padding: 4px 5px 3px 5px;
+	list-style:none;
+	cursor:default;
+	}
+* html li.krumo-footnote {
+	line-height: 13px;
+	}
+div.krumo-version {
+	float:right;
+	}
+li.krumo-footnote h6 {
+	font: bold 11px verdana;
+	margin: 0px;
+	padding: 0px;
+	color:navy;
+	display:inline;
+	}
+* html li.krumo-footnote h6 {
+	margin-right: 3px;
+	}
+li.krumo-footnote a {
+	font: bold 10px arial;
+	color: #434343;
+	text-decoration:none;
+	}
+li.krumo-footnote a:hover {
+	color:black;
+	}
+
+
+li.krumo-footnote span.krumo-call {
+	font:normal 11px tahoma, verdana;
+	position: relative;
+	top: 1px;
+	}
+li.krumo-footnote span.krumo-call code {
+	font-weight:bold;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+div.krumo-title {
+	font: normal 11px tahoma, verdana;
+	position:relative;
+	top:9px;
+	cursor:default;
+	line-height:2px;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+strong.krumo-array-length,
+strong.krumo-string-length {
+	font-weight: normal;
+	color: #000099;
+	}
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+/* Using Krumo Skin: skins/schablon.com/skin.css */
+</style><script type="text/javascript"> krumo = {
+
+			/**
+			* Add a CSS class to an HTML element
+			* @param HtmlElement el
+			* @param string className
+			*/
+			"reclass": function(el, className)
+			{
+				if (el.className.indexOf(className) < 0)
+				{
+					el.className += (' ' + className);
+				}
+			},
+
+			/**
+			* Remove a CSS class to an HTML element
+			* @param HtmlElement el
+			* @param string className
+			*/
+			"unclass": function(el, className)
+			{
+				if (el.className.indexOf(className) > -1)
+				{
+					el.className = el.className.replace(className, '');
+				}
+			},
+
+			/**
+			* Toggle the nodes connected to an HTML element
+			* @param HtmlElement el
+			*/
+			"toggle": function(el)
+			{
+				var ul = el.parentNode.getElementsByTagName('ul');
+				for (var i=0; i<ul.length; i++)
+				{
+					if (ul[i].parentNode.parentNode == el.parentNode)
+					{
+						ul[i].parentNode.style.display = (ul[i].parentNode.style.display == 'none')
+							? 'block'
+							: 'none';
+					}
+				}
+
+				(ul[0].parentNode.style.display == 'block')
+					? krumo.reclass(el, 'krumo-opened')
+					: krumo.unclass(el, 'krumo-opened');
+			}
+		}
+		</script>			<div class="krumo-root">
+				<ul class="krumo-node krumo-first">
+							<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand">
+
+					<a class="krumo-name">krumo(array('a1'=> 'A1', 3, 'red')); </a>
+					(<em class="krumo-type">Array, <strong class="krumo-array-length">3 elements</strong></em>)
+								</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">a1</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">2 characters</strong> </em>)
+					<strong class="krumo-string">A1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div class="krumo-element">
+				<a class="krumo-name">0</a>
+				(<em class="krumo-type">Integer</em>)
+				<strong class="krumo-integer">3</strong>
+			</div>
+		</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">1</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">3 characters</strong> </em>)
+					<strong class="krumo-string">red</strong>
+
+					
+			</div>
+
+					</li>
+					</ul>
+		</div>
+				</li>
+							<li class="krumo-footnote">
+						<div class="krumo-version" style="white-space:nowrap;">
+							<h6>Krumo version 0.4</h6> | <a
+								href="https://github.com/kktsvetkov/krumo"
+								target="_blank">github.com/kktsvetkov/krumo</a>
+						</div>
+
+										<span class="krumo-call" style="white-space:nowrap;">
+						Called from <code>/home/kinobg/kaloyan.info/krumo/index.php</code>,
+							line <code>160</code></span>
+											&nbsp;
+					</li>
+				</ul>
+			</div>
+		
+			<p>
+			You can dump simultaneously more then one variable - here's another <b>PHP</b> example:
+			</p>
+<pre>
+ krumo($_SERVER, $_ENV);
+</pre>
+			<div class="krumo-root">
+				<ul class="krumo-node krumo-first">
+							<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand">
+
+					<a class="krumo-name">krumo($_SERVER, $_ENV); </a>
+					(<em class="krumo-type">Array, <strong class="krumo-array-length">36 elements</strong></em>)
+								</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">PATH</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">29 characters</strong> </em>)
+					<strong class="krumo-string">/bin:/usr/bin:/sbin:/usr/sbin</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">RAILS_ENV</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">production</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_NAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REQUEST_URI</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">QUERY_STRING</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REQUEST_METHOD</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">3 characters</strong> </em>)
+					<strong class="krumo-string">GET</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_PROTOCOL</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">8 characters</strong> </em>)
+					<strong class="krumo-string">HTTP/1.1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">GATEWAY_INTERFACE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">7 characters</strong> </em>)
+					<strong class="krumo-string">CGI/1.1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REMOTE_PORT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">5 characters</strong> </em>)
+					<strong class="krumo-string">53333</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_FILENAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">41 characters</strong> </em>)
+					<strong class="krumo-string">/home/kinobg/kaloyan.info/krumo/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_ADMIN</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">28 characters</strong> </em>)
+					<strong class="krumo-string">webmaster@krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">DOCUMENT_ROOT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">31 characters</strong> </em>)
+					<strong class="krumo-string">/home/kinobg/kaloyan.info/krumo</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REMOTE_ADDR</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">11 characters</strong> </em>)
+					<strong class="krumo-string">77.78.6.159</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_PORT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">2 characters</strong> </em>)
+					<strong class="krumo-string">80</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_ADDR</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">14 characters</strong> </em>)
+					<strong class="krumo-string">208.113.215.73</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_NAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">18 characters</strong> </em>)
+					<strong class="krumo-string">krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_SOFTWARE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">6 characters</strong> </em>)
+					<strong class="krumo-string">Apache</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_SIGNATURE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_COOKIE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">16 characters</strong> </em>)
+					<strong class="krumo-string">__utmc=218920579</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_ACCEPT_LANGUAGE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">32 characters</strong> </em>)
+					<strong class="krumo-string">en-US,en;q=0.9,bg;q=0.8,ru;q=0.7</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_ACCEPT_ENCODING</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">13 characters</strong> </em>)
+					<strong class="krumo-string">gzip, deflate</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">HTTP_ACCEPT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">85 characters</strong> </em>)
+					<strong class="krumo-string">text/html,application/xhtml+xml,application/xml...</strong>
+
+					
+			</div>
+
+							<div class="krumo-nest" style="display:none;">
+					<ul class="krumo-node">
+						<li class="krumo-child">
+							<div class="krumo-preview">text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</div>
+						</li>
+					</ul>
+				</div>
+						</li>
+				<li class="krumo-child">
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">HTTP_USER_AGENT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">120 characters</strong> </em>)
+					<strong class="krumo-string">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6)...</strong>
+
+					
+			</div>
+
+							<div class="krumo-nest" style="display:none;">
+					<ul class="krumo-node">
+						<li class="krumo-child">
+							<div class="krumo-preview">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36</div>
+						</li>
+					</ul>
+				</div>
+						</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_UPGRADE_INSECURE_REQUESTS</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_CONNECTION</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">5 characters</strong> </em>)
+					<strong class="krumo-string">close</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_HOST</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">18 characters</strong> </em>)
+					<strong class="krumo-string">krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">DH_USER</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">6 characters</strong> </em>)
+					<strong class="krumo-string">kinobg</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">ds_id_9401288</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">dsid</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">7 characters</strong> </em>)
+					<strong class="krumo-string">9401288</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_URI</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">26 characters</strong> </em>)
+					<strong class="krumo-string">http://krumo.kaloyan.info/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_URL</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">UNIQUE_ID</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">24 characters</strong> </em>)
+					<strong class="krumo-string">XCPaUdBxqMkAAEW5EqMAAAAC</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">FCGI_ROLE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">9 characters</strong> </em>)
+					<strong class="krumo-string">RESPONDER</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">PHP_SELF</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div class="krumo-element">
+				<a class="krumo-name">REQUEST_TIME_FLOAT</a>
+				(<em class="krumo-type">Float</em>)
+				<strong class="krumo-float">1545853521.121</strong>
+			</div>
+		</li>
+				<li class="krumo-child">
+			<div class="krumo-element">
+				<a class="krumo-name">REQUEST_TIME</a>
+				(<em class="krumo-type">Integer</em>)
+				<strong class="krumo-integer">1545853521</strong>
+			</div>
+		</li>
+					</ul>
+		</div>
+				</li>
+							<li class="krumo-footnote">
+						<div class="krumo-version" style="white-space:nowrap;">
+							<h6>Krumo version 0.4</h6> | <a
+								href="https://github.com/kktsvetkov/krumo"
+								target="_blank">github.com/kktsvetkov/krumo</a>
+						</div>
+
+										<span class="krumo-call" style="white-space:nowrap;">
+						Called from <code>/home/kinobg/kaloyan.info/krumo/index.php</code>,
+							line <code>168</code></span>
+											&nbsp;
+					</li>
+				</ul>
+			</div>
+					<div class="krumo-root">
+				<ul class="krumo-node krumo-first">
+							<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand">
+
+					<a class="krumo-name">krumo($_SERVER, $_ENV); </a>
+					(<em class="krumo-type">Array, <strong class="krumo-array-length">36 elements</strong></em>)
+								</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">PATH</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">29 characters</strong> </em>)
+					<strong class="krumo-string">/bin:/usr/bin:/sbin:/usr/sbin</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">RAILS_ENV</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">production</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_NAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REQUEST_URI</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">QUERY_STRING</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REQUEST_METHOD</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">3 characters</strong> </em>)
+					<strong class="krumo-string">GET</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_PROTOCOL</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">8 characters</strong> </em>)
+					<strong class="krumo-string">HTTP/1.1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">GATEWAY_INTERFACE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">7 characters</strong> </em>)
+					<strong class="krumo-string">CGI/1.1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REMOTE_PORT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">5 characters</strong> </em>)
+					<strong class="krumo-string">53333</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_FILENAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">41 characters</strong> </em>)
+					<strong class="krumo-string">/home/kinobg/kaloyan.info/krumo/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_ADMIN</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">28 characters</strong> </em>)
+					<strong class="krumo-string">webmaster@krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">DOCUMENT_ROOT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">31 characters</strong> </em>)
+					<strong class="krumo-string">/home/kinobg/kaloyan.info/krumo</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">REMOTE_ADDR</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">11 characters</strong> </em>)
+					<strong class="krumo-string">77.78.6.159</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_PORT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">2 characters</strong> </em>)
+					<strong class="krumo-string">80</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_ADDR</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">14 characters</strong> </em>)
+					<strong class="krumo-string">208.113.215.73</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_NAME</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">18 characters</strong> </em>)
+					<strong class="krumo-string">krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_SOFTWARE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">6 characters</strong> </em>)
+					<strong class="krumo-string">Apache</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SERVER_SIGNATURE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_COOKIE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">16 characters</strong> </em>)
+					<strong class="krumo-string">__utmc=218920579</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_ACCEPT_LANGUAGE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">32 characters</strong> </em>)
+					<strong class="krumo-string">en-US,en;q=0.9,bg;q=0.8,ru;q=0.7</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_ACCEPT_ENCODING</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">13 characters</strong> </em>)
+					<strong class="krumo-string">gzip, deflate</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">HTTP_ACCEPT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">85 characters</strong> </em>)
+					<strong class="krumo-string">text/html,application/xhtml+xml,application/xml...</strong>
+
+					
+			</div>
+
+							<div class="krumo-nest" style="display:none;">
+					<ul class="krumo-node">
+						<li class="krumo-child">
+							<div class="krumo-preview">text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</div>
+						</li>
+					</ul>
+				</div>
+						</li>
+				<li class="krumo-child">
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">HTTP_USER_AGENT</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">120 characters</strong> </em>)
+					<strong class="krumo-string">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6)...</strong>
+
+					
+			</div>
+
+							<div class="krumo-nest" style="display:none;">
+					<ul class="krumo-node">
+						<li class="krumo-child">
+							<div class="krumo-preview">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36</div>
+						</li>
+					</ul>
+				</div>
+						</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_UPGRADE_INSECURE_REQUESTS</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">1</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_CONNECTION</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">5 characters</strong> </em>)
+					<strong class="krumo-string">close</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">HTTP_HOST</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">18 characters</strong> </em>)
+					<strong class="krumo-string">krumo.kaloyan.info</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">DH_USER</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">6 characters</strong> </em>)
+					<strong class="krumo-string">kinobg</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">ds_id_9401288</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">0 characters</strong> </em>)
+					<strong class="krumo-string"></strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">dsid</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">7 characters</strong> </em>)
+					<strong class="krumo-string">9401288</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_URI</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">26 characters</strong> </em>)
+					<strong class="krumo-string">http://krumo.kaloyan.info/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">SCRIPT_URL</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">1 characters</strong> </em>)
+					<strong class="krumo-string">/</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">UNIQUE_ID</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">24 characters</strong> </em>)
+					<strong class="krumo-string">XCPaUdBxqMkAAEW5EqMAAAAC</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">FCGI_ROLE</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">9 characters</strong> </em>)
+					<strong class="krumo-string">RESPONDER</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">PHP_SELF</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">10 characters</strong> </em>)
+					<strong class="krumo-string">/index.php</strong>
+
+					
+			</div>
+
+					</li>
+				<li class="krumo-child">
+			<div class="krumo-element">
+				<a class="krumo-name">REQUEST_TIME_FLOAT</a>
+				(<em class="krumo-type">Float</em>)
+				<strong class="krumo-float">1545853521.121</strong>
+			</div>
+		</li>
+				<li class="krumo-child">
+			<div class="krumo-element">
+				<a class="krumo-name">REQUEST_TIME</a>
+				(<em class="krumo-type">Integer</em>)
+				<strong class="krumo-integer">1545853521</strong>
+			</div>
+		</li>
+					</ul>
+		</div>
+				</li>
+							<li class="krumo-footnote">
+						<div class="krumo-version" style="white-space:nowrap;">
+							<h6>Krumo version 0.4</h6> | <a
+								href="https://github.com/kktsvetkov/krumo"
+								target="_blank">github.com/kktsvetkov/krumo</a>
+						</div>
+
+										<span class="krumo-call" style="white-space:nowrap;">
+						Called from <code>/home/kinobg/kaloyan.info/krumo/index.php</code>,
+							line <code>168</code></span>
+											&nbsp;
+					</li>
+				</ul>
+			</div>
+					<p>
+			You probably saw from the <b>PHP</b> examples above that some of the nodes are expandable,
+			so if you want to inspect the nested information, click on them and they will
+			expand; if you do not need that information shown simply click again on it to
+			collapse it. Here's a <b>PHP</b> example to test this:
+			</p>
+
+<pre>
+ $x1->x2->x3->x4->x5->x6->x7->x8->x9 = 'X10';
+ krumo($x1);
+</pre>
+			<div class="krumo-root">
+				<ul class="krumo-node krumo-first">
+							<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">krumo($x1); </a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x2</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x3</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x4</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x5</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x6</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x7</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+
+			<div  onClick="krumo.toggle(this);"				class="krumo-element krumo-expand" >
+
+					<a class="krumo-name">x8</a>
+					(<em class="krumo-type">Object</em>)
+					<strong class="krumo-class">stdClass</strong>
+			</div>
+
+					<div class="krumo-nest" style="display:none;">
+			<ul class="krumo-node">
+				<li class="krumo-child">
+			<div 				class="krumo-element" >
+
+					<a class="krumo-name">x9</a>
+					(<em class="krumo-type">String,
+						<strong class="krumo-string-length">3 characters</strong> </em>)
+					<strong class="krumo-string">X10</strong>
+
+					
+			</div>
+
+					</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+					</ul>
+		</div>
+				</li>
+							<li class="krumo-footnote">
+						<div class="krumo-version" style="white-space:nowrap;">
+							<h6>Krumo version 0.4</h6> | <a
+								href="https://github.com/kktsvetkov/krumo"
+								target="_blank">github.com/kktsvetkov/krumo</a>
+						</div>
+
+										<span class="krumo-call" style="white-space:nowrap;">
+						Called from <code>/home/kinobg/kaloyan.info/krumo/index.php</code>,
+							line <code>180</code></span>
+											&nbsp;
+					</li>
+				</ul>
+			</div>
+		
+			<p>
+			The <code>krumo()</code> is the only standalone <b>PHP</b> function from the package, and
+			this is because basic dumps about variables (like <a
+			href="http://www.php.net/manual/en/function.print-r.php"
+			target="_blank"><code>print_r()</code></a> or <a
+			href="http://www.php.net/manual/en/function.var-dump.php"
+			target="_blank"><code>var_dump()</code></a>) are the
+			most common tasks such functionality is used for. The rest of the functionality
+			can be called using static calls to the <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			class. Here are several more <b>PHP</b> examples:
+			</p>
+
+<pre>
+ // print a debug backgrace
+ krumo::backtrace();
+
+ // print all the included(or required) files
+ krumo::includes();
+
+ // print all the included functions
+ krumo::functions();
+
+ // print all the declared classes
+ krumo::classes();
+
+ // print all the defined constants
+ krumo::defines();
+</pre>
+
+			<p>
+			 ... and so on, etc.
+			</p>
+
+			<p>
+			To see a <b>PHP</b> demonstration of most features, <a target="_blank" href="./demo/index.php">click here</a>.
+			</p>
+
+			<p>
+			Another handy feature is that you can enable and disable <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			no the fly.
+			</p>
+
+<pre>
+ // disable Krumo
+ krumo::disable();
+
+ // Krumo is disabled, nothing is printed
+ krumo::includes();
+
+ // enable Krumo
+ krumo::enable();
+
+ // Krumo is enable, printing is OK
+ krumo::classes();
+</pre>
+
+			<p>
+			This proves to be very useful when your <b>PHP</b> code gets swamped with <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			calls dumping debuging information, and instead of removing each of those dumps one by one,
+			you can just disable them.
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="skins"></a>
+			<h2>Skins</h2>
+			<p>
+			There are several skins pre-installed with this package, but if you wish you can
+			create skins of your own. The skins are simply CSS files that are prepended to
+			the result that <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> prints. If you want to use images in your CSS (for
+			background, list-style, etc), you have to use data URIs to embed them into the CSS.
+			</p>
+
+			<p>
+			Here's an example:
+			</p>
+<pre style="overflow-y:auto;">
+ background-image: url(data:image/gif;base64,R0lGODlhCQAJALMAAP///wAAAP///wAA...AJAAkAAAQTEIAna33USpwt79vncRpZgpcGRAA7);
+</pre>
+
+			<p>
+			Right now there are 4 Krumo skins (click on each to see a screenshot):
+				<a target="_blank" rel="lightbox[roadmap]" title="Krumo: &quot;Default&quot; theme screenshot" href="./screenshots/krumo_default_theme.png">default</a>,
+				<a target="_blank" rel="lightbox[roadmap]" title="Krumo: &quot;Blue&quot; theme screenshot" href="./screenshots/krumo_blue_theme.png">blue</a>,
+				<a target="_blank" rel="lightbox[roadmap]" title="Krumo: &quot;Green&quot; theme screenshot" href="./screenshots/krumo_green_theme.png">green</a>,
+				<a target="_blank" rel="lightbox[roadmap]" title="Krumo: &quot;Orange&quot; theme screenshot" href="./screenshots/krumo_orange_theme.png">orange</a>
+				and the latest - <a rel="lightbox[roadmap]" title="Krumo: &quot;Schablon.com&quot; theme screenshot"
+					target="_blank" href="./screenshots/krumo_schablon_com_theme.png">schablon.com</a>
+			</p>
+
+			<p>
+			Feel free to contribute any new skins that you create on your own. <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a>
+			is designed to present the <b>PHP</b> variable dumps in a nice and graceful way, so polishing its looks with new themes is a
+			very important task.
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="docs"></a>
+			<h2>Documentation</h2>
+
+			<p>
+			To browse the site copy of <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> docs,
+			<a href="./docs/" target="_blank">click here</a>.
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="download"></a>
+			<h2>Download</h2>
+			<p>
+			You can dowbload the latest relese of <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> from the project's download page at
+			<a href="https://github.com/kktsvetkov/krumo/releases">github.com/kktsvetkov/krumo/releases</a>.
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="tracker"></a>
+			<h2>Bug Tracker</h2>
+			<p>
+			For the <a href="http://krumo.kaloyan.info"><strong>Krumo</strong></a> project, please use the
+			<a href="https://github.com/kktsvetkov/krumo/issues">GitHub project page</a> to report issues.
+			If you want to report a bug, request a new feature, or you have ideas about improving the framework, use the link below:<br/>
+			<br/>
+			<a target="_blank" href="https://github.com/kktsvetkov/krumo/issues/new">https://github.com/kktsvetkov/krumo/issues/new</a>
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+			<a name="forum"></a>
+			<h2>Forums</h2>
+			<p>
+			As with the bugs, please use
+			<a href="https://github.com/kktsvetkov/krumo">http://github.com/kktsvetkov/krumo</a>
+			</p>
+			<a class="top" href="#top">^ back to the top of the page</a>
+
+		</div>
+	</div>
+
+	<!--# FOOTER #-->
+	<div id="ftr">
+		<a href="http://krumo.kaloyan.info/" title="Krumo: Version 2.0 of print_r(); and var_dump();">Krumo: Version 2.0 of print_r(); and var_dump();</a>
+	</div>
+
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-240471-4";
+urchinTracker();
+</script>
+
+</body>
+</html>
